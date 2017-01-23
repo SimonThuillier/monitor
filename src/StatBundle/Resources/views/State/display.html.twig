@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+        	<strong>Dernieres données</strong>	
+        	<br>
+              <div class="TextAlign-center"><table class="tableau" style="border-width:1px;width:80%;" border="1">
+              
+              {%  if has_data %}
+              	 <tr>
+					<td><strong>Mesure</strong></td>
+        		 </tr>
+                <tr>
+                  <td class="colonne">Date de mesure</td>
+                  <td class="colonne">{{ data_date|date('Y-m-d H:i:s')}} </td>
+                </tr>
+                <tr>
+                  <td class="colonne">ID device</td>
+                  <td class="colonne">{{ device_id }} </td>
+                </tr>
+                <tr>
+                  <td class="colonne">Temperature</td>
+                  <td class="colonne">{{ data_temp }} °C</td>
+                </tr>
+                <tr>
+                  <td class="colonne">Hygrometrie</td>
+                  <td class="colonne">{{ data_hygro }} %</td>
+                </tr>		
+             {%  else %}
+              	 <em><font color="red">Pas de données courantes :(</font> </em>
+             {%  endif  %}
+             
+             {%  if has_command %}
+              	 <tr>
+					<td><strong>Commande</strong></td>
+        		 </tr>
+                <tr>
+                  <td class="colonne">Date de commande</td>
+                  <td class="colonne">{{ command_date|date('Y-m-d H:i:s')}} </td>
+                </tr>
+                <tr>
+                  <td class="colonne">Temperature de consigne</td>
+                  <td class="colonne">{{ command_temp }} °C</td>
+                </tr>
+                <tr>
+                  <td class="colonne">Delta commande</td>
+                  <td class="colonne">{{ command_delta }} °C</td>
+                </tr>
+                <tr>
+                  <td class="colonne">Allumage chauffage</td>
+                  <td class="colonne">
+                  {% if command_on %}
+                  <div title="Chauffage ON">
+                  	<svg width="50" height="50">
+    					<circle cx="25" cy="25" r="14"
+     					fill="DarkOrange" stroke="gray" stroke-width="2"/>
+				  	</svg>
+				  </div>
+                  {% else %}
+                  <div title="Chauffage OFF">
+                  	<svg width="50" height="50">
+    					<circle cx="25" cy="25" r="14"
+     					fill="CornFlowerBlue" stroke="gray" stroke-width="2"/>
+				  	</svg>
+				  </div>
+                  {% endif %}</td>
+                </tr>	
+                <tr>
+                  <td class="colonne">Alarme</td>
+                  <td class="colonne">
+                  {% if command_alarm %}
+                  <div title="ALARME ACTIVE !">
+                  	<svg width="50" height="50">
+    					<circle cx="25" cy="25" r="14"
+     					fill="red" stroke="gray" stroke-width="2"/>
+				  	</svg>
+				  </div>
+                  {% else %}
+                  <div title="Alarme désactivée">
+                  	<svg width="50" height="50">
+    					<circle cx="25" cy="25" r="14"
+     					fill="green" stroke="gray" stroke-width="2"/>
+				  	</svg>
+				  </div>
+                  {% endif %}</td>
+                </tr>	
+             {%  else %}
+              	 <em><font color="red">Pas de commande courante :(</font> </em>
+             {%  endif  %}             
+             
+             
+             
+             
+             
+             
+
+      </table></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+{% if false %}
+<style>
+    body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
+    h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
+    h1 { font-size: 36px; }
+    h2 { font-size: 21px; margin-bottom: 1em; }
+    p { margin: 0 0 1em 0; }
+    a { color: #0000F0; }
+    a:hover { text-decoration: none; }
+    code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
+    #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
+    #container { padding: 2em; }
+    #welcome, #status { margin-bottom: 2em; }
+    #welcome h1 span { display: block; font-size: 75%; }
+    #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
+    #icon-book { display: none; }
+
+    @media (min-width: 768px) {
+        #wrapper { width: 80%; margin: 2em auto; }
+        #icon-book { display: inline-block; }
+        #status a, #next a { display: block; }
+
+        @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+        .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
+    }
+</style>
+
+{% endif %}
+{% endblock %}

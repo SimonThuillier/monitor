@@ -1,13 +1,87 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Monitor</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/style.css') }}" />
+    <script type="text/javascript" src="{{ asset("bundles/app/js/d3.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bundles/app/js/d3.min.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bundles/app/js/d3-time.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("bundles/app/js/d3-time.min.js") }}"></script>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+<div id="wrapper">
+    <div id="header">
+        <div id="logo">
+            <h1>
+                <a href="{{ path('stat_state_currentstate') }}">Monitor</a>
+            </h1>
+                      
+            
+ {% if app.user %}
+    <div>
+       Welcome {{ app.user.username }}
+    </div>
+ {% else %}
+ <div>
+    Guest mode
+    </div>
+ {% endif %}
+            
+            
+        </div>
+        <div id="menu">
+            <ul>
+                <li class="first current_page_item">
+                    <a href="{{ path('stat_state_currentstate') }}">Current State</a>
+                </li>
+                <li>
+                    <a href="{{ path('stat_chart_firstchart') }}">Chart</a>
+                </li>
+                <li>
+                    <a href="{{ path('stat_chart_demod3') }}">Demo D3.js</a>
+                </li>
+                {% if false %}
+                <li>
+                    <a type="hidden" href="{{ path('app_register') }}">Register</a>
+                </li>
+                {% endif %}
+                <li>
+                    {%  if is_granted(('IS_AUTHENTICATED_FULLY')) %}
+                        <a href="{{  path('logout') }}">Logout</a>
+                    {% else %}
+                        <a href="{{  path('app_login') }}">Login</a>
+                    {% endif %}
+                </li>
+            </ul>
+            <br class="clearfix" />
+        </div>
+    </div>
+
+    <div id="page">
+    
+    
+    
+    {% for flash_message in app.session.flashBag.get('warning') %}
+    <div class="flash-warning">
+        {{ flash_message }}
+    </div>
+{% endfor %}
+
+
+        {% block body '' %}
+        
+        {% block script '' %}
+        
+        {% block stylesheets '' %}
+
+        <div id="sidebar">
+{#             {{ render_esi(controller('AppBundle:Esi:Esi')) }}#}
+        </div>
+        <br class="clearfix" />
+    </div>
+</div>
+
+</body>
 </html>

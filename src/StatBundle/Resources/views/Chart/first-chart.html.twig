@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<input class="dataset2" id="dataset" type="hidden" name="dataset" value={{ dataset|json_encode }}>
+
+<p class="dataset" id="test" name="dataset"></p>
+
+<div id="wrapper">
+        <div id="container" class="container">
+        	<div id="chart" class="chart">
+        
+        
+        	</div>
+        
+        </div>
+    
+        
+
+    
+{% endblock %}
+
+
+{% block script %}
+    <script type="text/javascript">
+
+    var test = document.getElementById("dataset").value;
+    // console.log(JSON.parse(test))
+    var dataset = JSON.parse(test)
+    
+	/* d3.select(".container").selectAll("p")
+    .data(dataset)
+    .enter()
+    .append("p")
+    .text(function(d) { return d.temperature; })   */
+    
+    var monParseDate = d3.timeParse("%Y-%m-%d-%H-%M-%S");
+    var monFormatDate = d3.timeFormat("%Y-%m-%d-%H-%M-%S");
+    var monFormatDateAxe = d3.timeFormat("%d/%H:%M");
+
+    console.log(monFormatDate(monParseDate("2017-11-11-01-01-01")));
+    
+	// le graphe
+
+    	var w = 1600;
+    	var h = 250;
+    	var heightPadding = 20;  
+    	var widthPadding = 40;
+    	var tempPadding=0.5;   
+
+    	// scales
+    	var xScale = d3.scaleTime()
+		/*.domain([
+			d3.min(dataset, function(d) {    //Returns 480
+			    return monFormatDate(d.datePrise);  //References first value in each sub-array
+			}), 
+			d3.max(dataset, function(d) {    //Returns 480
+		    return monFormatDate(d.datePrise);  //References first value in each sub-array
+		})
+		])*/
+		.domain(d3.extent(dataset, function(d) { return monParseDate(d.datePrise); }))
+		.range([widthPadding,w-widthPadding]);
+
+		var yScale = d3.scaleLinear()
+        .domain([
+        	d3.min(dataset, function(d) { return d.temperature; })-tempPadding,
+             d3.max(dataset, function(d) { return d.temperature; })+tempPadding
+            ])
+        .range([ h-heightPadding,heightPadding]);
+
+   		var svg = d3.select(".chart")
+        .append("svg")
+        .attr("width", w)   
+        .attr("height", h); 
+		
+        // axis
+        var xAxis = d3.axisBottom(xScale)
+        .tickFormat(monFormatDateAxe)
+        .ticks(20);
+        var yAxis = d3.axisLeft(yScale)
+        .ticks(20);
+
+        var line = d3.line()
+        .x(function(d) {return xScale(monParseDate(d.datePrise)); })
+        .y(function(d) { return yScale(d.temperature); });
+
+
+        var area = d3.area()
+        .x(function(d) { return xScale(monParseDate(d.datePrise)); })
+        .y1(function(d) { return yScale(d.temperature); })
+        .y0(yScale(23));
+
+        console.log("test1");
+
+       /* var clip1 =  svg.append("clipPath")
+        .attr("id", "clip-below");
+
+        
+        clip1.append("path")
+        .attr("d", area.y0(0));
+
+        console.log("test1.5");
+
+        svg.append("clipPath")
+            .attr("id", "clip-above")
+          .append("path")
+            .attr("d", area.y0(0));
+
+        console.log("test2");
+        
+        svg.append("path")
+            .attr("class", "area above")
+            .attr("clip-path", "url(#clip-above)")
+            .attr("d", area.y0(function(d) { return yScale(d.temperature); }));
+
+        svg.append("path")
+            .attr("class", "area below")
+            .attr("clip-path", "url(#clip-below)")
+            .attr("d", area);*/
+   		
+        console.log("test3");
+        svg
+        .selectAll("circle")
+        .data(dataset)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d) {
+        	return xScale(monParseDate(d.datePrise));
+   		})
+   		.attr("cy", function(d) {
+   			return yScale(d.temperature);
+   		})
+   		.attr("r", function(d) {
+    		return 2;
+		});;
+
+	      
+	     svg.append("path").attr("d", line(dataset))
+	     .attr("stroke", "blue")
+		.attr("stroke-width", 2)
+		.attr("fill", "none");
+
+	     svg.append("path").attr("d", area(dataset))
+		.attr("fill", "gray")
+	     .attr("opacity", 0.5);	
+
+	     svg.append("g")
+	     .attr("transform", "translate(0," + (h - heightPadding) + ")")
+	    .call(xAxis);
+
+	     svg.append("g")
+	     .attr("transform", "translate(" + (widthPadding) + ",0)")
+	    .call(yAxis);
+
+    
+	     //.attr("d", area(function(d) {return d;}))
+    
+    </script>
+{% endblock %}
+
+
+{% block stylesheets %}
+<style type="text/css">
+div.bar {
+    // display: inline-block;
+    width: 20px;
+    height: 75px;   /* We'll override this later */
+    background-color: red;
+}
+
+.area.above {
+  fill: rgb(252,141,89);
+}
+
+.area.below {
+  fill: rgb(145,207,96);
+}
+
+
+
+    </style>
+{% endblock %}
+
+

@@ -1,3 +1,23 @@
+stat:
+    resource: "@StatBundle/Controller/"
+    type:     annotation
+    prefix:   /stat
+
+entity_app:
+    resource: "@EntityAppBundle/Controller/"
+    type:     annotation
+    prefix:   /entity-app
+
+user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix:   /user
+
+
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+    
+logout:
+    path: /user/logout    

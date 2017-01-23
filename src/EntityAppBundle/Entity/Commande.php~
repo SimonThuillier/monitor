@@ -1,0 +1,99 @@
+<?php
+
+namespace EntityAppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Commande
+ *
+ * @ORM\Table(name="commande", indexes={@ORM\Index(name="commande_id_data_idx", columns={"data_id"})})
+ * @ORM\Entity
+ */
+class Commande
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_debut", type="datetime", nullable=false)
+     */
+    private $dateDebut;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_fin", type="datetime", nullable=true)
+     */
+    private $dateFin;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="delta", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $delta;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="allumage", type="boolean", nullable=false)
+     */
+    private $allumage;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="actif", type="boolean", nullable=false)
+     */
+    private $actif;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="consigne_element_id", type="bigint", nullable=false)
+     */
+    private $consigneElementId;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="alarme", type="boolean", nullable=false)
+     */
+    private $alarme = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="replication_id", type="bigint", nullable=true)
+     */
+    private $replicationId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="work_field", type="string", length=64, nullable=true)
+     */
+    private $workField;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \EntityAppBundle\Entity\Data
+     *
+     * @ORM\ManyToOne(targetEntity="EntityAppBundle\Entity\Data")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="data_id", referencedColumnName="id")
+     * })
+     */
+    private $data;
+
+
+}
+

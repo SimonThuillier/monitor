@@ -1,24 +1,60 @@
-# To get started with security, check out the documentation:
-# http://symfony.com/doc/current/security.html
+# http://symfony.com/doc/current/book/security.html
 security:
 
-    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    encoders:
+            EntityAppBundle\Entity\User:
+                algorithm: bcrypt
+                cost: 12
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
+        mes_users:
+        
+            entity:
+                class: EntityAppBundle\Entity\User
+                property: username
+                
+    access_control:
+
+        
+        - { path: ^/user/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+               
+                 
 
     firewalls:
+    
+    
+    
+    
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+            
+#        login:
+#            
+#            anonymous: true
+#            
+#            pattern: ^/user/login
 
         main:
-            anonymous: ~
-            # activate different ways to authenticate
-
+            pattern:   ^/
+            anonymous: true
             # http_basic: ~
-            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+            provider: mes_users
+            
+               
 
-            # form_login: ~
+            form_login:
+                login_path: /user/login
+                check_path: /user/login
+
+                
+            logout:
+                path:   /user/logout
+                target: /    
+
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+              
