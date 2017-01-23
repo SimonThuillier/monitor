@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+body {
+    background-color: DarkSeaGreen;
+}
+
+div.flash-warning {
+    background-color: lightCoral;
+    color: black;
+}
+
+div.flash-notice {
+    background-color: lightGrey;
+    color: black;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+.drug {
+    fill: violet;
+    stroke: blue;
+    stroke-width: 5;
+ }
