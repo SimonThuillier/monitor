@@ -43,7 +43,7 @@ class Commande
     /**
      * @var boolean
      *
-     * @ORM\Column(name="allumage_froid", type="boolean", nullable=false,options={default:0})
+     * @ORM\Column(name="allumage_froid", type="boolean", nullable=true)
      */
     private $allumageFroid=0;
 
