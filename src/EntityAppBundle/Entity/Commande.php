@@ -38,7 +38,14 @@ class Commande
      *
      * @ORM\Column(name="allumage", type="boolean", nullable=false)
      */
-    private $allumage;
+    private $allumage=0;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="allumage_froid", type="boolean", nullable=false,options={default:0})
+     */
+    private $allumageFroid=0;
 
     /**
      * @var boolean
@@ -191,6 +198,8 @@ class Commande
     {
         return $this->allumage;
     }
+    
+    
 
     /**
      * Set actif
@@ -345,4 +354,24 @@ class Commande
     {
         return $this->data;
     }
+    
+
+    /**
+     * allumageFroid
+     * @return boolean
+     */
+    public function getAllumageFroid(){
+        return $this->allumageFroid;
+    }
+
+    /**
+     * allumageFroid
+     * @param boolean $allumageFroid
+     * @return Commande
+     */
+    public function setAllumageFroid($allumageFroid){
+        $this->allumageFroid = $allumageFroid;
+        return $this;
+    }
+
 }
