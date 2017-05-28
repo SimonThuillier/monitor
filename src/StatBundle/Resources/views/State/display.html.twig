@@ -48,20 +48,27 @@
                   <td class="colonne">{{ command_delta }} °C</td>
                 </tr>
                 <tr>
-                  <td class="colonne">Allumage chauffage</td>
+                  <td class="colonne">Allumage chaud/froid</td>
                   <td class="colonne">
-                  {% if command_on %}
+                  {% if command_on == 1 %}
                   <div title="Chauffage ON">
                   	<svg width="50" height="50">
     					<circle cx="25" cy="25" r="14"
      					fill="DarkOrange" stroke="gray" stroke-width="2"/>
 				  	</svg>
 				  </div>
-                  {% else %}
-                  <div title="Chauffage OFF">
+                  {% elseif command_on == -1 %}
+                  <div title="Refroidissement ON">
                   	<svg width="50" height="50">
     					<circle cx="25" cy="25" r="14"
      					fill="CornFlowerBlue" stroke="gray" stroke-width="2"/>
+				  	</svg>
+				  </div>
+				  {% else %}
+                  <div title="Chauffage/Refroidissement OFF">
+                  	<svg width="50" height="50">
+    					<circle cx="25" cy="25" r="14"
+     					fill="gray" stroke="gray" stroke-width="2"/>
 				  	</svg>
 				  </div>
                   {% endif %}</td>

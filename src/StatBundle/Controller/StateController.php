@@ -31,7 +31,8 @@ class StateController extends Controller
 			$state['has_command'] = true;
 			$state['command_date'] = $currentCommand->getDateDebut();
 			$state['command_delta'] = $currentCommand->getDelta();
-			$state['command_on'] = $currentCommand->getAllumage();
+			// 1 heating, 0 nothing, -1 cooling
+			$state['command_on'] = ($currentCommand->getAllumage()>0)?$currentCommand->getAllumage():(($currentCommand->getAllumageFroid()>0)?-1:0);
 			$state['command_alarm'] = $currentCommand->getAlarme();
 			
 			$currentData = $currentCommand->getData();
