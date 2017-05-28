@@ -48,7 +48,7 @@ class StateController extends Controller
 		}
 		
 		//$currentData->getTemperature()
-		return new Response($currentCommand->getAllumage() .'-'.$currentCommand->getAllumageFroid().'-'.$state['command_on']);
+		//return new Response($currentCommand->getAllumage() .'-'.$currentCommand->getAllumageFroid().'-'.$state['command_on']);
 		
 		
 		return $this->render('StatBundle:State:display.html.twig',$state);
