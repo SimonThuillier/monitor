@@ -51,24 +51,8 @@ doctrine:
     
             
         connections:
-            # A collection of different named connections (e.g. default, conn2, etc)
-            app:
-         
-                driver:   pdo_mysql
-                dbname:   "%database_app_name%"
-                host:     "%database_app_host%"
-                port:     "%database_app_port%"
-                user:     "%database_app_user%"
-                password: "%database_app_password%"
-                path:                 ~
-                memory:               ~    
-                charset: utf8mb4
-                default_table_options:
-                
-                   charset: utf8mb4
-                   collate: utf8mb4_unicode_ci
-                
-            rep:
+            # A collection of different named connections (e.g. default, conn2, etc)          
+            default:
          
                 driver:   pdo_mysql
                 dbname:   "%database_rep_name%"
