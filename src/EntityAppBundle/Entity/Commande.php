@@ -41,9 +41,9 @@ class Commande
     private $allumage=0;
     
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="allumage_froid", type="boolean", nullable=true)
+     * @ORM\Column(name="allumage_froid", type="integer", nullable=true)
      */
     private $allumageFroid=0;
 
@@ -358,7 +358,7 @@ class Commande
 
     /**
      * allumageFroid
-     * @return boolean
+     * @return integer
      */
     public function getAllumageFroid(){
         return $this->allumageFroid;
@@ -366,7 +366,7 @@ class Commande
 
     /**
      * allumageFroid
-     * @param boolean $allumageFroid
+     * @param integer $allumageFroid
      * @return Commande
      */
     public function setAllumageFroid($allumageFroid){
