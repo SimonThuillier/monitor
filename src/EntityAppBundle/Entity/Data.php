@@ -1,7 +1,6 @@
 <?php
 
 namespace EntityAppBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="data")
  * @ORM\Entity
- * @ORM\Connection("lol")
  */
 class Data
 {

@@ -98,13 +98,7 @@ doctrine:
             default:
                 connection: app
                 mappings:
-                    EntityAppBundle:  ~
-
-         
-            rep:
-                connection: rep
-                mappings:
-                    EntityAppBundle: ~     
+                  EntityAppBundle: ~
 
 
 # Swiftmailer Configuration

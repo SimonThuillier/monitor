@@ -43,16 +43,10 @@ class Commande
     /**
      * @var integer
      *
-     * @ORM\Column(name="allumage_froid", type="integer", nullable=true)
+     * @ORM\Column(name="allumage_froid", type="integer", nullable=false,options={"default":0})
      */
     private $allumageFroid=0;
-    
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="merde", type="integer", nullable=true)
-     */
-    private $merde=0;
+   
 
     /**
      * @var boolean
