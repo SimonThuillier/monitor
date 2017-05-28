@@ -5,6 +5,7 @@ namespace StatBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use EntityAppBundle\Entity as E;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/state")
