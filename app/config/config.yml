@@ -80,7 +80,7 @@ doctrine:
         default_entity_manager: default
         entity_managers:
             default:
-                connection: app
+                connection: default
                 mappings:
                   EntityAppBundle: ~
 
