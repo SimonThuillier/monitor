@@ -20,7 +20,7 @@ class StateController extends Controller
 		$em = $this->getDoctrine();
 		
 		/** @var E\Commande $currentCommand */
-		$currentCommand = $em->getRepository('EntityAppBundle:Commande','rep')
+		$currentCommand = $em->getRepository('EntityAppBundle:Commande')
 		->findOneByActif(1)
 		;
 		

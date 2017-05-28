@@ -17,7 +17,7 @@ class ChartController extends Controller
 	 */
 	public function firstChartAction($nb=30)
 	{
-		$em = $this->getDoctrine()->getEntityManager('rep');
+		$em = $this->getDoctrine()->getEntityManager();
 		
 		
 		$q = $em->createQuery('SELECT d.id,d.datePrise,d.temperature FROM EntityAppBundle:Data d ORDER BY d.id DESC')
